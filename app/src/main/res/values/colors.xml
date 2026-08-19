@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary_blue">#1976D2</color>
+    <color name="primary_blue_dark">#0D47A1</color>
+    <color name="header_blue">#123A73</color>
+    <color name="header_blue_light">#1C5A9E</color>
+
+    <color name="screen_background">#F4F8FF</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="title_text">#102A43</color>
+    <color name="secondary_text">#627D98</color>
+    <color name="header_secondary_text">#D7E8FF</color>
+
+    <color name="divider">#E5EDF5</color>
+    <color name="radius_chip_background">#E3F2FD</color>
+    <color name="status_background">#FFF4D6</color>
+    <color name="status_text">#8A6116</color>
 </resources>

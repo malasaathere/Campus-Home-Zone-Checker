@@ -1,9 +1,14 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.CampusHomeZoneChecker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style
+        name="Theme.CampusHomeZoneChecker"
+        parent="android:style/Theme.Material.Light.NoActionBar">
 
-    <style name="Theme.CampusHomeZoneChecker" parent="Base.Theme.CampusHomeZoneChecker" />
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:statusBarColor">@color/header_blue</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:colorAccent">@color/primary_blue</item>
+    </style>
 </resources>
