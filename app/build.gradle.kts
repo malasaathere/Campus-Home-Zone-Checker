@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.group2.campuszonechecker"
         minSdk = 24
-        targetSdk = 37
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
     }
