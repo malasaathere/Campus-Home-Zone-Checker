@@ -16,6 +16,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.material)
     // Added now so later members can use FusedLocationProviderClient.
     implementation("com.google.android.gms:play-services-location:21.3.0")
 }
