@@ -1,11 +1,16 @@
 package com.group2.campuszonechecker
 
-import android.app.Activity
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var locationHelper: LocationHelper
     private lateinit var tvStatus: TextView
@@ -16,29 +21,79 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Member 1: Initial UI setup
+        // Initialize UI elements (Member 1's work)
         tvStatus = findViewById(R.id.tvStatus)
         tvDistance = findViewById(R.id.tvDistance)
         btnCheckZone = findViewById(R.id.btnCheckZone)
 
-        // Member 3: Initialize the location helper
+        // Initialize LocationHelper (Member 3's responsibility)
         locationHelper = LocationHelper(this)
 
-        // Member 3: Set button listener to fetch location
         btnCheckZone.setOnClickListener {
-            tvStatus.text = "Status: Fetching location..."
-            
-            locationHelper.fetchCurrentLocation { location ->
-                if (location != null) {
-                    // Display coordinates for testing purposes
-                    val lat = location.latitude
-                    val lon = location.longitude
-                    tvStatus.text = "Status: Location Retrieved"
-                    tvDistance.text = "Lat: $lat\nLon: $lon"
-                } else {
-                    tvStatus.text = "Status: Failed to get location"
-                    tvDistance.text = "Distance: N/A"
-                }
+            checkLocationPermissionAndGetLocation()
+        }
+    }
+
+    /**
+     * Checks if location permissions are granted. If not, requests them.
+     * This fulfills the requirement of having a permission flow before location retrieval.
+     * (Member 2's contribution)
+     */
+    private fun checkLocationPermissionAndGetLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request permissions
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                1001
+            )
+            return
+        }
+
+        // Permission already granted, proceed to get location
+        retrieveLocation()
+    }
+
+    /**
+     * Uses LocationHelper to get the current device location and updates the UI.
+     * (Member 3's integration)
+     */
+    private fun retrieveLocation() {
+        tvStatus.text = "Checking..."
+        
+        locationHelper.getCurrentLocation { location: Location? ->
+            if (location != null) {
+                // Member 3: Display latitude and longitude for testing as requested
+                val locationInfo = "Lat: ${location.latitude}\nLon: ${location.longitude}"
+                tvDistance.text = locationInfo
+                tvStatus.text = "Location Retrieved"
+            } else {
+                tvStatus.text = "Error"
+                tvDistance.text = "Location not available"
+                Toast.makeText(this, "Failed to get location", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1001) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                retrieveLocation()
+            } else {
+                tvStatus.text = "Permission Denied"
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
