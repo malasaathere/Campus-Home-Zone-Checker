@@ -16,7 +16,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
     // Added now so later members can use FusedLocationProviderClient.
     implementation("com.google.android.gms:play-services-location:21.3.0")
 }
