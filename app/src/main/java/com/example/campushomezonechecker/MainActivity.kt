@@ -9,10 +9,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var locationHelper: LocationHelper
+    private lateinit var zoneChecker: ZoneChecker
     private lateinit var tvStatus: TextView
     private lateinit var tvDistance: TextView
     private lateinit var btnCheckZone: Button
@@ -26,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         tvDistance = findViewById(R.id.tvDistance)
         btnCheckZone = findViewById(R.id.btnCheckZone)
 
-        // Initialize LocationHelper (Member 3's responsibility)
+        // Initialize Helpers (Member 3 and Member 4 integration)
         locationHelper = LocationHelper(this)
+        zoneChecker = ZoneChecker()
 
         btnCheckZone.setOnClickListener {
             checkLocationPermissionAndGetLocation()
@@ -63,20 +66,31 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Uses LocationHelper to get the current device location and updates the UI.
-     * (Member 3's integration)
+     * Integrates ZoneChecker for final decision.
      */
     private fun retrieveLocation() {
         tvStatus.text = "Checking..."
+        tvStatus.setTextColor(getColor(android.R.color.darker_gray))
         
         locationHelper.getCurrentLocation { location: Location? ->
             if (location != null) {
-                // Member 3: Display latitude and longitude for testing as requested
-                val locationInfo = "Lat: ${location.latitude}\nLon: ${location.longitude}"
-                tvDistance.text = locationInfo
-                tvStatus.text = "Location Retrieved"
+                // Member 4's integration: Check if location is inside the zone
+                val result = zoneChecker.checkZone(location)
+                
+                if (result.isInside) {
+                    tvStatus.text = "Inside Zone"
+                    tvStatus.setTextColor(getColor(android.R.color.holo_green_dark))
+                } else {
+                    tvStatus.text = "Outside Zone"
+                    tvStatus.setTextColor(getColor(android.R.color.holo_red_dark))
+                }
+                
+                // Display distance clearly in meters (Member 5 requirement)
+                tvDistance.text = String.format(Locale.getDefault(), "%.1f m", result.distanceMeters)
             } else {
-                tvStatus.text = "Error"
-                tvDistance.text = "Location not available"
+                tvStatus.text = "Location Unavailable"
+                tvStatus.setTextColor(getColor(android.R.color.holo_red_dark))
+                tvDistance.text = "N/A"
                 Toast.makeText(this, "Failed to get location", Toast.LENGTH_SHORT).show()
             }
         }
@@ -93,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 retrieveLocation()
             } else {
                 tvStatus.text = "Permission Denied"
+                tvStatus.setTextColor(getColor(android.R.color.holo_red_dark))
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }
         }

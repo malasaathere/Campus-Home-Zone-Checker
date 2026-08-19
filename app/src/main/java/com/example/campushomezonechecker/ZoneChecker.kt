@@ -9,11 +9,10 @@ import android.location.Location
 class ZoneChecker {
 
     companion object {
-        // Define the fixed reference location constants
-        // These can be easily changed as needed.
-        const val REFERENCE_LATITUDE = 1.2966 // Example: Near a university campus
-        const val REFERENCE_LONGITUDE = 103.7764
-        const val ZONE_RADIUS_METERS = 200.0
+        // Reference: University of Kelaniya, Sri Lanka
+        const val REFERENCE_LATITUDE = 6.9740
+        const val REFERENCE_LONGITUDE = 79.9150
+        const val ZONE_RADIUS_METERS = 500.0 // 500 meters radius
     }
 
     /**
