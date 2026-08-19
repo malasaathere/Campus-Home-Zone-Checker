@@ -1,8 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Campus Zone Checker</string>
     <string name="title_campus_zone_checker">Campus / Home Zone Checker</string>
-    <string name="fixed_zone_info">A fixed reference zone will be used for the zone check.</string>
+
+    <string name="header_subtitle">
+        Find out whether your current location is inside the selected zone
+    </string>
+
+    <string name="fixed_reference_zone">Fixed Reference Zone</string>
+    <string name="fixed_zone_info">
+        The application will compare your current location with a predefined campus or home location.
+    </string>
+    <string name="example_radius">Reference radius: 200 m</string>
+
+    <string name="zone_check_result">Zone Check Result</string>
+    <string name="result_helper">Your result will appear after checking your location.</string>
+
+    <string name="status_label">Zone status</string>
+    <string name="not_checked">Not checked</string>
+
+    <string name="distance_label">Calculated distance</string>
+    <string name="distance_not_available">-- m</string>
+
     <string name="check_my_zone">Check My Zone</string>
-    <string name="status_not_checked">Status: Not checked</string>
-    <string name="distance_not_available">Distance: -- m</string>
+    <string name="permission_note">Location permission will be required when checking the zone.</string>
+    <string name="location_icon_description">Location zone icon</string>
 </resources>
