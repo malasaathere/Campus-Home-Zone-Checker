@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Checks if location permissions are granted. If not, requests them.
      * This fulfills the requirement of having a permission flow before location retrieval.
+     * (Member 2's contribution)
      */
     private fun checkLocationPermissionAndGetLocation() {
         if (ActivityCompat.checkSelfPermission(
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Uses LocationHelper to get the current device location and updates the UI.
+     * (Member 3's integration)
      */
     private fun retrieveLocation() {
         tvStatus.text = "Checking..."
@@ -90,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 retrieveLocation()
             } else {
+                tvStatus.text = "Permission Denied"
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
             }
         }
