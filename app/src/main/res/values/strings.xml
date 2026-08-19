@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Campus Zone Checker</string>
+    <string name="title_campus_zone_checker">Campus / Home Zone Checker</string>
+    <string name="fixed_zone_info">A fixed reference zone will be used for the zone check.</string>
+    <string name="check_my_zone">Check My Zone</string>
+    <string name="status_not_checked">Status: Not checked</string>
+    <string name="distance_not_available">Distance: -- m</string>
+</resources>
