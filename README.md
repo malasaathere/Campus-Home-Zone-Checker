@@ -23,14 +23,14 @@ To test this application on an Android Emulator, follow these steps:
 2. **Navigate to Location:** Select the 'Location' tab.
 3. **Set Mock Location:**
    - **Test 1 (Inside Zone):** 
-     - Set Latitude: `1.2966`
-     - Set Longitude: `103.7764`
+     - Set Latitude: `6.9740`
+     - Set Longitude: `79.9150`
      - Click 'Send'.
      - In the app, tap **Check My Zone**.
      - **Expected:** "Inside Zone" and "0.0 m".
    - **Test 2 (Outside Zone):** 
-     - Set Latitude: `1.3000`
-     - Set Longitude: `103.8000`
+     - Set Latitude: `7.0000`
+     - Set Longitude: `80.0000`
      - Click 'Send'.
      - In the app, tap **Check My Zone**.
      - **Expected:** "Outside Zone" and a distance > 200m.
